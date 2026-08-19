@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Marketing Copy"
+  short_description: "Strategic, hierarchy-aware marketing copy review"
+  default_prompt: "Use $review-marketing-copy to review this copy, diagnose its strategy and hierarchy, and propose stronger directions."
