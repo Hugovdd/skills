@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Break a plan, spec, or conversation into a set of **tickets** — tracer-bullet vertical slices, each declaring the tickets that **block** it.
 
-The issue tracker and triage label vocabulary should have been provided to you — run `/setup-matt-pocock-skills` if not.
+The issue tracker and workflow label vocabulary should have been provided to you; run `/setup-matt-pocock-skills` if not.
 
 ## Process
 
@@ -61,12 +61,12 @@ A cold agent boots from only the ticket URL + a clean checkout — it never sees
 
 ### 6. Publish the tickets to the configured tracker
 
-Publish the approved tickets. **How** depends on the tracker `/setup-matt-pocock-skills` configured — the tickets are the same either way, only the shape of the blocking edges changes:
+Publish the approved tickets. **How** depends on the configured tracker:
 
-- **Local files** → write one `tickets.md` in the repo root, all tickets in dependency order (blockers first), each with its "Blocked by" listing the titles it depends on. Use the file template below.
-- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking / sub-issue relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. Label each ticket by readiness: `ready-for-agent` only if its body is self-sufficient for a cold agent AND every artifact it references is committed; otherwise `needs-spec` (a spec/grill pass must land before an agent starts it). Never leave an underspecified ticket unlabelled — in an agent-per-URL setup it looks startable and traps an agent.
+- **Local files** → write one `tickets.md` in the repo root, all tickets in dependency order, each with its blockers.
+- **A real issue tracker** → publish one issue per ticket in dependency order so blocking edges can reference real identifiers. Use native blocking/sub-issue relationships where available. Apply `ready-for-agent` only to dependency-frontier tickets whose body and referenced approved plan are sufficient for a cold agent. Apply `blocked` to tickets with an open blocker. Do not use `needs-spec`.
 
-Do NOT close or modify any parent issue.
+Do not close or modify the parent issue.
 
 <tickets-file-template>
 
@@ -114,5 +114,5 @@ The end-to-end behaviour this ticket makes work, from the user's perspective —
 
 In either form, avoid specific file paths or code snippets — they go stale fast. Two exceptions. **(a) A copy-from exemplar:** when the work mirrors an existing thing in-repo, name it ("build this like `src/jsx/tools/keyframes/`") — for a cold agent this is the single highest-leverage line, worth the staleness risk. **(b) A prototype snippet:** if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.
 
-Work the frontier one ticket at a time with `/implement`, clearing context between tickets.
+Work the frontier one ticket at a time with `/build`, clearing context between tickets.
 </content>
