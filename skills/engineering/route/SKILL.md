@@ -27,9 +27,49 @@ Create a missing canonical label before applying it. Do not create `needs-triage
 
 Accept an issue number or URL. Read its body, labels, dependencies, and all comments. Replace any older route recommendation by posting a new dated comment; do not edit the issue body into a parallel schema.
 
-### Planning queue
+Before routing a selected issue, reconcile only that issue:
 
-With no issue, list open tickets whose latest `## Route rec` has `Status: needs gstack-autoplan` and no later `## Plan approved` receipt. Show one compact table. Let Hugo select tickets to send into their Plan stages, then process the selections in rank order. Enforce the urgency caps before writing changes.
+- Remove `ready-for-agent` when it has no valid readiness receipt.
+- Remove `blocked` when its recorded external dependency is resolved.
+- Remove noncanonical workflow labels such as `needs-spec`; preserve product, component, bug, and domain labels.
+- Replace obsolete priority labels when the new urgency differs.
+- Never mutate an unselected issue during queue inspection.
+
+### Queue
+
+With no issue, read open Hugo-filed tickets once and classify them into four sections:
+
+1. **Needs routing** - no `## Route rec` comment.
+2. **Needs planning** - the latest `## Route rec` has `Status: needs gstack-autoplan` and no later `## Plan approved`.
+3. **Learning jobs** - the latest `## Route rec` has `Status: learn first`.
+4. **Readiness drift** - `ready-for-agent` is present without either:
+   - a latest `## Route rec` with `Status: AUTO`, or
+   - a later `## Plan approved` receipt.
+
+Ignore closed and `wontfix` tickets. Show one compact table per non-empty section. Include issue, title, urgency, rank, dependencies, and the reason it appears in that section.
+
+Sections are mutually exclusive. Readiness drift wins over Needs planning, Learning jobs, and Needs routing; otherwise use the first matching section above.
+
+Queue inspection is read-only. Let Hugo select tickets before changing comments or labels.
+
+Process selected tickets in this order:
+
+1. readiness drift
+2. now
+3. ranked next
+4. later
+5. unrouted tickets without urgency
+
+For a selected unrouted or drifted ticket, run the One issue path first. For a selected planning ticket, continue at Plan path. For a selected learning job, show its learning brief and named next skill, but do not start a worker.
+
+### Receipt precedence
+
+Use comment creation time, not issue-body order.
+
+- The newest `## Route rec` replaces every older route recommendation.
+- A `## Plan approved` receipt is valid only when it is later than the newest Route recommendation.
+- `ready-for-agent` is valid only when supported by `AUTO` on the newest Route recommendation or by a later Plan-approved receipt.
+- An older approval never authorizes work after a newer route recommendation.
 
 ## Score independently
 
@@ -104,7 +144,7 @@ Post:
 ## Route rec
 
 **Learn or build:** learn | build
-**Planning:** just-do-it | write-a-plan | explore-first
+**Planning:** n/a | just-do-it | write-a-plan | explore-first
 **How careful:** casual | normal | extra-careful
 **Urgency:** now | next | later
 **Rank if next:** 1 | 2 | 3 | n/a
@@ -114,6 +154,19 @@ Post:
 ```
 
 For `AUTO`, apply `ready-for-agent` and stop. Do not start a worker.
+
+For `learn first`, post the Route receipt followed by:
+
+```markdown
+## Learning brief
+
+**Question:** <one named question>
+**Answer destination:** <issue comment, committed file, or other durable location>
+**Done when:** <observable completion condition>
+**Next skill:** research | prototype | real-surface verification
+```
+
+Do not apply `ready-for-agent`. Close the learning ticket when the answer is written and the done condition is met. Any resulting build starts as a new or rerouted build ticket and returns to Think.
 
 ## Plan path
 

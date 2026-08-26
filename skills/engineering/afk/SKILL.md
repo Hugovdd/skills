@@ -52,7 +52,7 @@ Even when selected, a merge must satisfy `ship` readiness and the orchestrator's
 
 ### Ready tickets
 
-Use only unassigned `ready-for-agent` tickets with no open blocker. Work the dependency frontier. Respect one Now and three ranked Next parent caps. Claim before dispatch.
+Use only unassigned `ready-for-agent` tickets with no open blocker and a valid readiness receipt: either `AUTO` on the latest `## Route rec` or a later `## Plan approved`. Work the dependency frontier. Respect one Now and three ranked Next parent caps. Claim before dispatch.
 
 ### Pending verification
 
