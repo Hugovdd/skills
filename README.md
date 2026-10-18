@@ -75,6 +75,10 @@ Film pipeline first, then decks. Identity work is ordered: bible → character p
 | `character-builder` | Photoreal character grammar for Higgsfield / Nano Banana Pro: face lock, outfits, sheets on a flat gray plate. |
 | `banana-pro-director-30` | Higgsfield still-image director: outfits, sheets, cinematic scene plates, outfit swaps. |
 | `cinema-director-v3` | Seedance 2.0/2.5 and Higgsfield video prompt grammar on a locked 16-slot spine. |
+| `shotcaller-v1` | Joey's newer Seedance 2.0/2.5 director on the same 16-slot spine. Use it for any Seedance shot, especially dialogue from a pasted script, lipsync to an attached track, or extending an existing clip. |
+| `castkit-v1` | Joey's newer version of `character-builder`, photoreal or animated. Use it to lock a face, build outfits on a locked character, or make character sheets on a flat gray plate. |
+| `scenecraft-v1` | Environment and location plates for Nano Banana Pro, Seedream and other image models. Use it for empty sets, characters placed into a scene as a first frame, matching multi-angle coverage, or editing an existing plate. |
+| `motiondojo-v1` | Higgsfield Genjutsu motion-transfer prompts. Use it when you have a reference video and want its movement or camera path on your own characters in your own world. |
 | `frontend-slides` | Zero-dependency animated HTML presentations from scratch or PPTX, fixed 1920x1080 stage. |
 
 ## Business
