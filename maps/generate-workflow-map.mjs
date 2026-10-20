@@ -317,7 +317,7 @@ note(
   'n-size',
   1580,
   860,
-  'Size (from plan-flow)\nsmall = contained, skip planning\nbig = blast radius, spec + thermo likely\ndirection = product or core architecture. Grill. Spec review. Accept recommended answers unless it changes the product or you are 50/50.',
+  'Size\nsmall = contained, skip planning\nbig = blast radius, spec + thermo likely\ndirection = product or core architecture. Grill. Spec review. Accept recommended answers unless it changes the product or you are 50/50.',
   'light-violet',
 )
 
@@ -424,27 +424,6 @@ arrow('a-wclear', 'way-work', 'way-clear', 'loop until', 'orange', {
   toAnchor: { x: 0, y: 0.5 },
 })
 
-// --- PARALLEL ---
-frame('f-par', 2260, 1160, 560, 620, 'Path D · many independent groups', 'violet')
-heading('h-par', 2280, 1170, 'D. Parallel', 'l')
-box('fcw', 2300, 1250, 260, 80, 'find-concurrent-work\npartition + triage', 'light-blue')
-box('pflow', 2300, 1380, 260, 80, 'parallel-flow', 'violet')
-box('p-grill', 2580, 1380, 200, 80, 'grill ≤3 groups\nrest auto-spec', 'orange')
-box('p-run', 2300, 1520, 260, 80, 'worktree agents\nthen reconcile', 'violet')
-caption('c-par', 2300, 1640, 'Only if blast radii are disjoint.\nElse fall back to Path B + plan-flow.', 'grey')
-arrow('a-fcw', 'fcw', 'pflow', '', 'violet', {
-  fromAnchor: { x: 0.5, y: 1 },
-  toAnchor: { x: 0.5, y: 0 },
-})
-arrow('a-pg', 'pflow', 'p-grill', '', 'orange', {
-  fromAnchor: { x: 1, y: 0.5 },
-  toAnchor: { x: 0, y: 0.5 },
-})
-arrow('a-prun', 'pflow', 'p-run', '', 'violet', {
-  fromAnchor: { x: 0.5, y: 1 },
-  toAnchor: { x: 0.5, y: 0 },
-})
-
 // ===========================================================================
 // 4. IMPLEMENT  (superpowers iron law)
 // ===========================================================================
@@ -455,14 +434,12 @@ box('impl-seams', 60, 1940, 260, 90, 'tdd\nagree seams first\nthat is "what is s
 box('impl-red', 360, 1940, 180, 90, 'RED\nfailing test', 'light-red')
 box('impl-green', 570, 1940, 180, 90, 'GREEN\nmin code', 'light-green')
 box('impl-skill', 790, 1940, 200, 90, 'implement\none ticket', 'light-blue')
-box('plan-flow', 1030, 1940, 220, 90, 'plan-flow\ndecisions already made', 'violet')
-box('impl-pipe', 1290, 1940, 220, 90, 'plan-pipeline\neng review in subagent', 'violet')
 
 caption(
   'c-impl',
   60,
   2070,
-  'obra/superpowers: no production code before a failing test. Watch it fail. Watch it pass.\nPocock tdd: one vertical slice per cycle. Refactor is NOT in this loop. It belongs to review.\nimplement always ends in code-review. plan-flow is the single-change command once grilling is done.',
+  'obra/superpowers: no production code before a failing test. Watch it fail. Watch it pass.\nPocock tdd: one vertical slice per cycle. Refactor is NOT in this loop. It belongs to review.\nimplement always ends in code-review.',
   'grey',
 )
 
@@ -483,10 +460,6 @@ arrow('a-rg', 'impl-red', 'impl-green', '', 'green', {
   toAnchor: { x: 0, y: 0.5 },
 })
 arrow('a-gi', 'impl-green', 'impl-skill', '', 'blue', {
-  fromAnchor: { x: 1, y: 0.5 },
-  toAnchor: { x: 0, y: 0.5 },
-})
-arrow('a-pf', 'plan-flow', 'impl-pipe', 'spawns', 'violet', {
   fromAnchor: { x: 1, y: 0.5 },
   toAnchor: { x: 0, y: 0.5 },
 })
@@ -566,11 +539,6 @@ box('g-cr', 1120, gY2, 170, 64, 'code-review-hugo', 'light-blue')
 box('g-th', 1320, gY2, 150, 64, 'thermo-nuclear', 'red')
 box('g-per', 1500, gY2, 190, 64, 'gstack-autoplan', 'red')
 
-const gY3 = 3100
-box('g-pf', 500, gY3, 150, 64, 'plan-flow', 'violet')
-box('g-par', 680, gY3, 160, 64, 'parallel-flow', 'violet')
-box('g-fcw', 870, gY3, 190, 64, 'find-concurrent-work', 'light-blue')
-box('g-pipe', 1090, gY3, 150, 64, 'plan-pipeline', 'violet')
 
 arrow('g1', 'g-setup', 'g-tracker', 'writes', 'green', {
   fromAnchor: { x: 1, y: 0.5 },
@@ -612,28 +580,6 @@ arrow('g9', 'g-impl', 'g-tdd', 'uses', 'blue', {
 arrow('g10', 'g-impl', 'g-cr', 'then', 'blue', {
   fromAnchor: { x: 1, y: 0.8 },
   toAnchor: { x: 0, y: 0.5 },
-})
-arrow('g11', 'g-pf', 'g-pipe', '', 'violet', {
-  fromAnchor: { x: 1, y: 0.5 },
-  toAnchor: { x: 0, y: 0.5 },
-})
-arrow('g12', 'g-pipe', 'g-per', '', 'red', {
-  fromAnchor: { x: 1, y: 0.5 },
-  toAnchor: { x: 0, y: 0.5 },
-})
-arrow('g13', 'g-par', 'g-fcw', '', 'violet', {
-  fromAnchor: { x: 1, y: 0.5 },
-  toAnchor: { x: 0, y: 0.5 },
-})
-arrow('g14', 'g-pf', 'g-cr', '', 'blue', {
-  fromAnchor: { x: 0.8, y: 0 },
-  toAnchor: { x: 0.3, y: 1 },
-  dash: 'dashed',
-})
-arrow('g15', 'g-par', 'g-th', 'if big', 'red', {
-  fromAnchor: { x: 1, y: 0.2 },
-  toAnchor: { x: 0.2, y: 1 },
-  dash: 'dashed',
 })
 arrow('g16', 'g-tracker', 'g-way', 'read', 'grey', {
   fromAnchor: { x: 1, y: 0.5 },

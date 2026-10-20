@@ -116,7 +116,7 @@ A scary trigger forbids casual and auto-start.
 Set urgency only on the parent job:
 
 - **now / `priority:P0`:** on fire; at most one open parent
-- **next / `priority:P1`:** intended next; at most three open parents, ranked 1-3 in the route comment
+- **next / `priority:P1`:** intended next; at most five open parents, ranked 1-5 in the route comment
 - **later / `priority:P2`:** worthwhile, not this week
 
 Refuse an assignment that would exceed a cap until Hugo frees or reranks a slot. Child tickets inherit urgency and receive no priority label.
@@ -147,7 +147,7 @@ Post:
 **Planning:** n/a | just-do-it | write-a-plan | explore-first
 **How careful:** casual | normal | extra-careful
 **Urgency:** now | next | later
-**Rank if next:** 1 | 2 | 3 | n/a
+**Rank if next:** 1 | 2 | 3 | 4 | 5 | n/a
 **Existing behavior test:** <test or n/a>
 **Blast radius:** <one sentence>
 **Status:** AUTO | needs gstack-autoplan | learn first
