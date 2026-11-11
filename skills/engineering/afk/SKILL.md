@@ -52,6 +52,8 @@ Use only unassigned `ready-for-agent` tickets with no open blocker and a valid r
 
 Use only draft PRs whose latest build/ship receipt says `verification pending`. Run the exact real-surface scenario required by the approved plan. A passing result may make the PR eligible for `ship` readiness; `/afk` itself does not mark ready unless the `ship` contract is executed.
 
+Before calling computer-use work AFK-ready, prove both the required interactions and the recovery path with the controller and setup that will run unattended. Check the resulting state: access grants, screenshots and a moving drag preview alone are insufficient. Keep the affected work unready while either proof is missing.
+
 ### Codebase health
 
 Run the configured health survey read-only unless the user explicitly selected a concrete cleanup ticket. Surveys produce findings, not opportunistic refactors.
