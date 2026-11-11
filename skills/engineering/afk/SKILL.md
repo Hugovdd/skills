@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # AFK
 
-Schedule unattended work. `/afk` changes when eligible work runs, never what quality or safety policy requires.
+Run selected work unattended until every item is finished or blocked, then clean up and report. `/afk` never changes quality or safety policy.
 
 ## Read policy
 
@@ -14,13 +14,7 @@ Read `docs/agents/orchestrator.md` before dispatch. If it is missing or cannot p
 
 ## Ask once
 
-Use one question round containing both:
-
-### Duration
-
-- lunch
-- afternoon
-- overnight
+Use one question round to select the allowed queues. Ask for a deadline only when the user requests a time limit.
 
 ### Allowed queues
 
@@ -33,7 +27,7 @@ Multi-select; every option defaults off:
 - extra-careful jobs
 - merges
 
-No selection means do nothing. Do not reinterpret duration as permission.
+No selection means do nothing.
 
 ## Hard boundaries
 
@@ -80,7 +74,7 @@ Dispatch independent frontier items concurrently when the orchestrator supports 
 
 ## Return note
 
-When the allowed duration ends or all work settles, write one concise note:
+When all selected work settles, or the user asks you to stop, clean up and write one concise note:
 
 ```markdown
 ## When you get back
