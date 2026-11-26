@@ -1,0 +1,4 @@
+interface:
+  display_name: "Altar Tool Research"
+  short_description: "Investigate AE tools and prepare an Altar spec"
+  default_prompt: "Use $altar-research-tool to investigate this After Effects tool and prepare an evidence-based Altar implementation spec."
